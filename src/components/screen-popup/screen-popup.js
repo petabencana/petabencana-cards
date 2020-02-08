@@ -2,7 +2,6 @@ import { bindable, customElement } from 'aurelia-framework';
 import { Config } from 'resources/config';
 import { inject, observable } from 'aurelia-framework';
 
-
 //start-aurelia-decorators
 @customElement('screen-popup')
 @inject(Config)
@@ -34,7 +33,7 @@ export class ScreenPopup {
     //   $('#dropdown_city').hide();
     // }
 
-    const map = Object.keys(this.config.instance_regions);
+    const map = Object.keys(this.config.sub_regions);
     // console.log(map)
     let newObj = map.filter(value => {
       return value.indexOf(newval.toLowerCase()) !== -1 ? value : null;
@@ -45,12 +44,10 @@ export class ScreenPopup {
     }
   }
 
-
-  switchCity(city) {
-    this.changeCity(city, true);
+  switchRegion(city) {
     $('#screen').css('display', 'none');
-
   }
+
   attached() {
   }
 }
