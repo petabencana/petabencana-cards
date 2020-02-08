@@ -18,5 +18,6 @@ export class Config {
     this.default_language = env[dep.name].default_language;
     this.supported_card_decks = dep.supported_card_decks;
     this.supported_cities = dep.map.instance_regions;
+    this.sub_regions = dep.map.sub_regions;
   }
 }

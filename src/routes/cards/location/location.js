@@ -2,15 +2,17 @@ import * as L from 'leaflet';
 import {inject} from 'aurelia-framework';
 import {ReportCard} from 'utility/report-card';
 import {EventAggregator} from 'aurelia-event-aggregator';
+import { LocationUtility } from 'utility/location-utility';
 
 //start-aurelia-decorators
-@inject(EventAggregator, ReportCard)
+@inject(EventAggregator, ReportCard, LocationUtility)
 //end-aurelia-decorators
 export class Location {
-  constructor(EventAggregator, ReportCard) {
+  constructor(EventAggregator, ReportCard, LocationUtility) {
     this.ea = EventAggregator;
     this.reportcard = ReportCard;
     this.config = ReportCard.config;
+    this.locaiton_util = LocationUtility;
   }
 
   getCitiesList() {
@@ -23,7 +25,6 @@ export class Location {
         center: this.config.supported_cities[city].center
       });
     }
-
   }
 
   drawGpsMarkers(center, accuracy, map) {
@@ -120,6 +121,13 @@ export class Location {
     });
   }
 
+  switchRegion(region) {
+    let self = this;
+    const cityCenter = self.locaiton_util.getCityCenter(region);
+    console.log(cityCenter);
+    this.setMapCenter(cityCenter);
+    // $('#screen').css('display', 'none');
+  }
   // center format:  [lat, lng]
   setMapCenter(center) {
     // hide cityPopup
